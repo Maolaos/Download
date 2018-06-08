@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity<MainView,MainPresenter> implement
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.setData(Uri.fromParts("package", getPackageName(), null));
             startActivity(intent);
+
         }
 
     }
