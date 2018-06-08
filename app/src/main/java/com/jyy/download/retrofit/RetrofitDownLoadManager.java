@@ -26,6 +26,7 @@ import okhttp3.ResponseBody;
  */
 
 public class RetrofitDownLoadManager {
+
     //文件总长度
     private long mFileLength;
     //待下载文件
