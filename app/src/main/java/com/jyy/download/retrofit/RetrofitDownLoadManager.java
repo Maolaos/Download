@@ -61,21 +61,18 @@ public class RetrofitDownLoadManager {
             if (!mFile.exists()) {
                 //文件不存在，从0开始下载
                 mFile.createNewFile();
-                if (mFileRange!=null){
+                if (mFileRange != null) {
                     mGreenDao.delete(mFileRange);
                 }
                 return 0;
             } else {
-
-
                 if (mFileRange != null) {
                     //文件存在，已经下载完成
                     if (mFileRange.getIsFinish()) {
                         //完整性校验
-                        EventBus.getDefault().post(new DownResult(true,mFileName));
+                        EventBus.getDefault().post(new DownResult(true, mFileName));
                         return -1;
                     } else {
-
                         //文件下载未完成，从断点处下载
                         mFileLength = mFileRange.getLength();
                         return mFileRange.getStart();
@@ -84,7 +81,7 @@ public class RetrofitDownLoadManager {
                 } else {
                     mFile.delete();
                     mFile.createNewFile();
-                    if (mFileRange!=null){
+                    if (mFileRange != null) {
                         mGreenDao.delete(mFileRange);
                     }
                     return 0;
@@ -103,12 +100,11 @@ public class RetrofitDownLoadManager {
             return false;
         }
 
-        if (mStart > 0 && mFileLength>0&&mStart == mFileLength) {
+        if (mStart > 0 && mFileLength > 0 && mStart == mFileLength) {
             return true;
         }
-
+        //从0开始下载，数据库插入数据
         if (mStart == 0) {
-
             mFileRange = new FileRange();
             mFileRange.setFileName(mFileName);
             mFileRange.setIsFinish(false);
@@ -116,15 +112,13 @@ public class RetrofitDownLoadManager {
             mFileRange.setStart(mStart);
             mFileRange.setTime(System.currentTimeMillis());
             mGreenDao.update(mFileRange);
-            mFileLength=mBody.contentLength();
-
+            mFileLength = mBody.contentLength();
         }
-
 
         InputStream mInputStream = null;
         OutputStream mOutputStream = null;
         try {
-            byte[] mReader = new byte[1024*1024];
+            byte[] mReader = new byte[1024 * 1024];
             //边读边写
             mInputStream = mBody.byteStream();
             mOutputStream = new FileOutputStream(mFile, true);
@@ -136,15 +130,13 @@ public class RetrofitDownLoadManager {
                 mOutputStream.write(mReader, 0, read);
                 mStart += read;
                 //进度回调
-
-                    int num = (int) (mStart * 100 / mFileLength);
-                    mObserver.onSetProgress(mFileName, num);
-                    Log.i("TAG", "进度回调" + ":" + mStart + "  " + num);
-
+                int num = (int) (mStart * 100 / mFileLength);
+                mObserver.onSetProgress(mFileName, num);
+                Log.i("TAG", "进度回调" + ":" + mStart + "  " + num);
             }
             mOutputStream.flush();
             flag = true;
-
+            //更新数据库数据
             mFileRange.setFileName(mFileName);
             mFileRange.setIsFinish(true);
             mFileRange.setStart(mStart);
@@ -152,7 +144,7 @@ public class RetrofitDownLoadManager {
             mGreenDao.update(mFileRange);
             //此处可以进行文件完整性校验(尤其针对APK文件,否则有可能无法安装)
             Log.i("TAG", mFileName + ": 下载完成……");
-            EventBus.getDefault().post(new DownResult(true,mFileName));
+            EventBus.getDefault().post(new DownResult(true, mFileName));
             return true;
         } catch (IOException e) {
             Log.i("TAG", mFileName + ": 下载失败……");
@@ -160,7 +152,6 @@ public class RetrofitDownLoadManager {
         } finally {
             //保存进度到本地数据库
             if (!flag) {
-
                 mFileRange.setFileName(mFileName);
                 mFileRange.setStart(mStart);
                 mFileRange.setTime(System.currentTimeMillis());
