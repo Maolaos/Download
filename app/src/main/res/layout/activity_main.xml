@@ -9,7 +9,8 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="horizontal">
+       android:orientation="horizontal"
+       android:gravity="center_vertical">
       <cn.bingoogolapple.progressbar.BGAProgressBar
           android:id="@+id/pg_main_progress_one"
           style="@android:style/Widget.ProgressBar.Horizontal"
@@ -30,15 +31,18 @@
           app:bga_pb_unReachedHeight="2dp"/>
       <Button
           android:id="@+id/btn_main_load_one"
-          android:layout_width="80dp"
-          android:layout_height="50dp"
+          android:layout_width="60dp"
+          android:layout_height="30dp"
           android:text="下载"
-          android:layout_centerInParent="true"/>
+          android:textColor="#FFC73B"
+          android:layout_centerInParent="true"
+          android:background="@drawable/btn_bg"/>
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="horizontal">
+       android:orientation="horizontal"
+       android:gravity="center_vertical">
       <cn.bingoogolapple.progressbar.BGAProgressBar
           android:id="@+id/pg_main_progress_two"
           style="@android:style/Widget.ProgressBar.Horizontal"
@@ -59,15 +63,18 @@
           app:bga_pb_unReachedHeight="2dp"/>
       <Button
           android:id="@+id/btn_main_load_two"
-          android:layout_width="80dp"
-          android:layout_height="50dp"
+          android:layout_width="60dp"
+          android:layout_height="30dp"
           android:text="下载"
-          android:layout_centerInParent="true"/>
+          android:textColor="#FFC73B"
+          android:layout_centerInParent="true"
+          android:background="@drawable/btn_bg"/>
    </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:orientation="horizontal">
+       android:orientation="horizontal"
+       android:gravity="center_vertical">
       <cn.bingoogolapple.progressbar.BGAProgressBar
           android:id="@+id/pg_main_progress_three"
           style="@android:style/Widget.ProgressBar.Horizontal"
@@ -88,10 +95,12 @@
           app:bga_pb_unReachedHeight="2dp"/>
       <Button
           android:id="@+id/btn_main_load_three"
-          android:layout_width="80dp"
-          android:layout_height="50dp"
+          android:layout_width="60dp"
+          android:layout_height="30dp"
           android:text="下载"
-          android:layout_centerInParent="true"/>
+          android:layout_centerInParent="true"
+          android:textColor="#FFC73B"
+          android:background="@drawable/btn_bg"/>
    </LinearLayout>
 
 </LinearLayout>

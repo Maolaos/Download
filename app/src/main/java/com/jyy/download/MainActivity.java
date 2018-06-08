@@ -70,6 +70,10 @@ public class MainActivity extends BaseActivity<MainView,MainPresenter> implement
     protected void initData(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         unbinder= ButterKnife.bind(this);
+
+
+
+
         btn_main_load_one.setOnClickListener(onClickListener);
         btn_main_load_two.setOnClickListener(onClickListener);
         btn_main_load_three.setOnClickListener(onClickListener);
