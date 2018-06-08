@@ -57,7 +57,9 @@ public class RetrofitManagement {
 
     public void onDownload(String start,String url,BaseObserver<ResponseBody> observer){
         intetface.download(start,url)
+                //在io线程中请求下载
                 .subscribeOn(Schedulers.io())
+                //在io线程中读流写文件
                 .observeOn(Schedulers.io())
                 .subscribe(observer);
     }
