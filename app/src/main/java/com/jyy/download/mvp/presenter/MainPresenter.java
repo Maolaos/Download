@@ -64,7 +64,7 @@ public class MainPresenter extends BasePresenter<MainView>  {
 
 
     private void download(String url,final  String fileName){
-        final  RetrofitDownLoadManager manager= new RetrofitDownLoadManager(mContext);
+        final  RetrofitDownLoadManager manager= new  RetrofitDownLoadManager(mContext);
         final  long start=manager.getFileStart(mGreenDao,fileName);
 
         //下载完成
