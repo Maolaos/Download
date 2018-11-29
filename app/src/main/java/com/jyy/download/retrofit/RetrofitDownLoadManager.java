@@ -11,7 +11,7 @@ import com.jyy.download.greendao.FileRange;
 import com.jyy.download.mvp.base.BaseObserver;
 import com.jyy.download.util.FileUtil;
 
-import org.greenrobot.eventbus.EventBus;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,7 +71,8 @@ public class RetrofitDownLoadManager {
                     //文件存在，已经下载完成
                     if (mFileRange.getIsFinish()) {
                         //完整性校验
-                        EventBus.getDefault().post(new DownResult(true, mFileName));
+                        //取代事务车结果回调，完成解耦
+                        mObserver.onResultCallBack(new DownResult(true, mFileName));
                         return -1;
                     } else {
                         //文件下载未完成，从断点处下载
@@ -145,7 +146,8 @@ public class RetrofitDownLoadManager {
             mGreenDao.update(mFileRange);
             //此处可以进行文件完整性校验(尤其针对APK文件,否则有可能无法安装)
             Log.i("TAG", mFileName + ": 下载完成……");
-            EventBus.getDefault().post(new DownResult(true, mFileName));
+            //取代事务车结果回调，完成解耦
+            mObserver.onResultCallBack(new DownResult(true, mFileName));
             return true;
         } catch (IOException e) {
             Log.i("TAG", mFileName + ": 下载失败……");

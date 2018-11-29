@@ -3,6 +3,7 @@ package com.jyy.download.mvp.presenter;
 import android.Manifest;
 import android.content.Context;
 
+import com.jyy.download.bean.DownResult;
 import com.jyy.download.greendao.FileRange;
 import com.jyy.download.mvp.base.BaseObserver;
 import com.jyy.download.mvp.base.BasePresenter;
@@ -100,7 +101,10 @@ public class MainPresenter extends BasePresenter<MainView>  {
                 mView.onProgress(fileName,progress);
             }
 
-
+            @Override
+            protected void onResult(DownResult result) {
+                mView.onDownloadResult(result);
+            }
 
 
         });
